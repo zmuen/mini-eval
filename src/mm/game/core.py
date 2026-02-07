@@ -223,6 +223,8 @@ class MiniMetroEnv:
     def remove_path(self, path: Path):
         for metro in path.metros:
             for passenger in list(metro.passengers):
+                if passenger in self.travel_plans:
+                    del self.travel_plans[passenger]
                 if passenger in self.passengers:
                     self.passengers.remove(passenger)
             if metro in self.metros:

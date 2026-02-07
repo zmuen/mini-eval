@@ -119,7 +119,10 @@ def find_shared_path(env: Any, station_a: Station, station_b: Station) -> Path |
 
 
 def passenger_has_travel_plan(env: Any, passenger: Passenger) -> bool:
-    return passenger in env.travel_plans and env.travel_plans[passenger].next_path is not None
+    if passenger not in env.travel_plans:
+        return False
+    next_path = env.travel_plans[passenger].next_path
+    return next_path is not None and next_path in env.paths
 
 
 def find_next_path_for_passenger_at_station(
